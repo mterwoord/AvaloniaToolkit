@@ -1,0 +1,4 @@
+﻿<Window xmlns="https://github.com/avaloniaui" xmlns:controls="clr-namespace:AvaloniaToolkit.Controls;assembly=AvaloniaToolkit" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <controls:HueRingPicker x:Name="colorPicker"/>
+</Window>

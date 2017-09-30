@@ -1,0 +1,50 @@
+﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:controls="clr-namespace:AvaloniaToolkit.Controls;assembly=AvaloniaToolkit"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="controls|HueRingPicker">
+        <Setter Property="ThumbBorderBrush" Value="{StyleResource HighlightBrush}"/>
+        <Setter Property="ThumbBorderThickness" Value="8"/>
+        <Setter Property="ThumbBackground" Value="Transparent"/>
+        <Setter Property="RingThickness" Value="100.0"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                    <Grid
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        x:Name="PART_ContainerGrid">                       
+                        <Image
+                            x:Name="PART_HueRingImage"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Stretch="None"
+                            Margin="{TemplateBinding ThumbBorderThickness}"/>
+                        <controls:RingSlice
+                           x:Name="PART_RingThumb"
+                           IsHitTestVisible="False"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Stroke="Red"
+                           StrokeThickness="{TemplateBinding ThumbBorderThickness}"
+                           Fill="{TemplateBinding ThumbBackground}"
+                           Width="500"
+                           Height="500"
+                           RenderTransformOrigin="0.5,0.5">
+
+                            <!--                            Stroke="{TemplateBinding ThumbBorderBrush}"-->
+                            <controls:RingSlice.RenderTransform>
+                                <RotateTransform
+                                    x:Name="PART_ThumbTransform" />
+                            </controls:RingSlice.RenderTransform>
+                        </controls:RingSlice>
+                        
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>
