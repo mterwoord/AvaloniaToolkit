@@ -264,10 +264,12 @@ namespace AvaloniaToolkit.Controls
         private void OnPointerMoved(object sender, PointerEventArgs e)
         {
             // todo: IsInContact?
-            //if (!e.Pointer.IsInContact)
-            //{
-            //    return;
-            //}
+            if (!e.InputModifiers.HasFlag(InputModifiers.LeftMouseButton)
+                && !e.InputModifiers.HasFlag(InputModifiers.MiddleMouseButton)
+                && !e.InputModifiers.HasFlag(InputModifiers.RightMouseButton))
+            {
+                return;
+            }
 
             var point = e.Device.GetPosition(_hueRingImage);
             UpdateValueForPoint(point);
@@ -275,7 +277,7 @@ namespace AvaloniaToolkit.Controls
 
         private void OnPointerPressed(object sender, PointerPressedEventArgs e)
         {
-            e.Device.Capture(this);
+            //e.Device.Capture(this);
             var point = e.GetPosition(_hueRingImage);
             UpdateValueForPoint(point);
         }
@@ -305,9 +307,7 @@ namespace AvaloniaToolkit.Controls
             {
                 return;
             }
-
-            //VisualTreeDebugger2.DebugVisualTree(_ringThumb, true);
-
+            
             // Hue ring needs to be smaller than available container space so the thumb fits
             var hueRingSize = Math.Min(
                 _containerGrid.Bounds.Width - 2 * ThumbBorderThickness,
