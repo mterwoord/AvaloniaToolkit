@@ -164,20 +164,6 @@ namespace AvaloniaToolkit.Controls
             
         }
 
-        protected override Size MeasureOverride(Size availableSize)
-        {
-            var xResult = base.MeasureOverride(availableSize);
-            ;
-            return xResult;
-        }
-
-        protected override Size MeasureCore(Size availableSize)
-        {
-            var xSize = base.MeasureCore(availableSize);
-            ;
-            return xSize;
-        }
-
         private void OnLoaded()
         {
             _isLoaded = true;
@@ -227,8 +213,17 @@ namespace AvaloniaToolkit.Controls
                     var wb = new WritableBitmap(hueRingSize, hueRingSize);
                     await wb.RenderColorPickerHueRingAsync(hueRingSize / 2 - (int)RingThickness);
                     _hueRingImage.Source = wb;
+                    if (Math.Abs(_hueRingImage.Bounds.Width - _containerGrid.Bounds.Width) > 0.1
+                        || Math.Abs(_hueRingImage.Bounds.Height - _containerGrid.Bounds.Height) > 0.1)
+                    {
+                        // HACK: SOme bug in avalonia doesn't always size the image correctly.
+                        Console.WriteLine("Fixing size of image!");
+                        _hueRingImage.Width = _containerGrid.Bounds.Width;
+                        _hueRingImage.Height = _containerGrid.Bounds.Height;
+                    }
                 }
             } while (_isLoaded);
+            Console.WriteLine("Stopping BitmapUpdater");
         }
 
         private async void DelayedUpdateWorkaround()

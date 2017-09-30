@@ -20,7 +20,9 @@ namespace AvaloniaToolkit.Sample
             AppBuilder.Configure<App>()
                 .UsePlatformDetect()
                 .Start<MainWindow>();
-            
+
+            Console.ReadLine();
+
         }
     }
 }

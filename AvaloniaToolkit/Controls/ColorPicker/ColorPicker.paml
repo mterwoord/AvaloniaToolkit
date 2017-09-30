@@ -2,7 +2,7 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style Selector="controls|HueRingPicker">
         <Setter Property="ThumbBorderBrush" Value="{StyleResource HighlightBrush}"/>
-        <Setter Property="ThumbBorderThickness" Value="8"/>
+        <Setter Property="ThumbBorderThickness" Value="8.0"/>
         <Setter Property="ThumbBackground" Value="Transparent"/>
         <Setter Property="RingThickness" Value="100.0"/>
         <Setter Property="Template">
@@ -22,7 +22,7 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Stretch="None"
-                            Margin="{TemplateBinding ThumbBorderThickness}"/>
+                            Margin="8"/>
                         <controls:RingSlice
                            x:Name="PART_RingThumb"
                            IsHitTestVisible="False"
