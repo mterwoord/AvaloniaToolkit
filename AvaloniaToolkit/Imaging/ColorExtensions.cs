@@ -100,7 +100,7 @@ namespace AvaloniaToolkit.Imaging
             }
             else if (max == r)
             {
-                h1 = ((g - b) / chroma) % 6;
+                h1 = ((g - b) / chroma);
             }
             else if (max == g)
             {
@@ -115,6 +115,10 @@ namespace AvaloniaToolkit.Imaging
             double saturation = chroma == 0 ? 0 : chroma / (1 - Math.Abs(2 * lightness - 1));
             HsvColor ret;
             ret.H = 60 * h1;
+            if (ret.H < 0)
+            {
+                ret.H += 360;
+            }
             ret.S = saturation;
             ret.V = max;
             ret.A = toDouble * rgba.A;
