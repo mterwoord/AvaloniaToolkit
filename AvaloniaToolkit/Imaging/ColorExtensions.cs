@@ -78,6 +78,51 @@ namespace AvaloniaToolkit.Imaging
         }
 
         /// <summary>
+        /// Converts an RGBA Color the HSV representation.
+        /// </summary>
+        /// <param name="rgba">The rgba.</param>
+        /// <returns></returns>
+        public static HsvColor ToHsv(this Color rgba)
+        {
+            const double toDouble = 1.0 / 255;
+            var r = toDouble * rgba.R;
+            var g = toDouble * rgba.G;
+            var b = toDouble * rgba.B;
+            var max = Math.Max(Math.Max(r, g), b);
+            var min = Math.Min(Math.Min(r, g), b);
+            var chroma = max - min;
+            double h1;
+
+            // ReSharper disable CompareOfFloatsByEqualityOperator
+            if (chroma == 0)
+            {
+                h1 = 0;
+            }
+            else if (max == r)
+            {
+                h1 = ((g - b) / chroma) % 6;
+            }
+            else if (max == g)
+            {
+                h1 = 2 + (b - r) / chroma;
+            }
+            else //if (max == b)
+            {
+                h1 = 4 + (r - g) / chroma;
+            }
+
+            double lightness = 0.5 * (max - min);
+            double saturation = chroma == 0 ? 0 : chroma / (1 - Math.Abs(2 * lightness - 1));
+            HsvColor ret;
+            ret.H = 60 * h1;
+            ret.S = saturation;
+            ret.V = max;
+            ret.A = toDouble * rgba.A;
+            return ret;
+            // ReSharper restore CompareOfFloatsByEqualityOperator
+        }
+
+        /// <summary>
         /// Returns a Color struct based on HSV model.
         /// </summary>
         /// <param name="hue">0..360 range hue</param>
